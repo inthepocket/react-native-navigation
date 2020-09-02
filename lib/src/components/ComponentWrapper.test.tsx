@@ -68,6 +68,7 @@ describe('ComponentWrapper', () => {
     const NavigationComponent = uut.wrap(componentName, () => MyComponent, store, componentEventsObserver);
     expect(NavigationComponent).not.toBeInstanceOf(MyComponent);
     const tree = renderer.create(<NavigationComponent componentId={'component1'} />);
+    // @ts-ignore
     expect(tree.toJSON()!.children).toEqual(['Hello, World!']);
   });
 
@@ -75,6 +76,7 @@ describe('ComponentWrapper', () => {
     const renderCount = jest.fn();
     const NavigationComponent = uut.wrap(componentName, () => MyComponent, store, componentEventsObserver);
     const tree = renderer.create(<NavigationComponent componentId={'component1'} text={'yo'} renderCount={renderCount} />);
+    // @ts-ignore
     expect(tree.toJSON()!.children).toEqual(['yo']);
     expect(renderCount).toHaveBeenCalledTimes(1);
   });
@@ -202,6 +204,7 @@ describe('ComponentWrapper', () => {
     it(`wraps the component with a react-redux provider with passed store`, () => {
       const NavigationComponent = uut.wrap(componentName, () => ConnectedComp, store, componentEventsObserver, undefined, ReduxProvider, reduxStore);
       const tree = renderer.create(<NavigationComponent componentId={'theCompId'} />);
+      // @ts-ignore
       expect(tree.toJSON()!.children).toEqual(['it just works']);
       expect((NavigationComponent as any).options()).toEqual({ foo: 123 });
     });
